@@ -22,5 +22,8 @@ ${list.get(1).ddc }
 	${item.title }  / ${item.ddc }
 	</div><br>
 </c:forEach>
+
+ID : <input type="text"/><br>
+PASS : <input type="text"/>
 </body>
 </html>
