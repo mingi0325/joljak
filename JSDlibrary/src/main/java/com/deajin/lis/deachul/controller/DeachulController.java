@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.deajin.lis.commons.BookVO;
 import com.deajin.lis.deachul.service.DeachulService;
 
 @Controller
@@ -14,9 +15,20 @@ public class DeachulController {
 	
 	@Autowired
 	DeachulService dService;
+	
 	@RequestMapping(value="/quick", method=RequestMethod.GET)
 	public String quickMove(@RequestParam("des1") String des1, @RequestParam("des2") String des2) {
 		System.out.println("퀵무");
 		return des1+"/"+des2; 
+	}
+	
+	@RequestMapping(value="/deachul/insert", method=RequestMethod.POST)
+	public String insertBook(BookVO vo) {
+		
+		System.out.println(vo);
+		int result = dService.insertBook(vo);
+		
+		System.out.println(result);
+		return "deachul/deachul_insert";
 	}
 }
