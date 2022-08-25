@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.deajin.lis.commons.UserVO;
 import com.deajin.lis.test.Service.testService;
@@ -59,5 +60,13 @@ public class HomeController {
 		}
 		model.addAttribute("test", list);
 		return "test_page";
+	}
+	
+	
+	
+	@RequestMapping(value="/qmove", method=RequestMethod.GET)
+	public String quick() {
+		
+		return "deachul/deachul_insert"; 
 	}
 }
