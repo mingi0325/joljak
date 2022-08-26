@@ -10,7 +10,8 @@
 		author,
 		publisher,
 		page,
-		info
+		info,
+		userid
 		)
 		values(
 		#{isbn},
@@ -19,7 +20,8 @@
 		#{author},
 		#{publisher},
 		#{page},
-		#{info}
+		#{info},
+		#{userid}
 		)
 	</insert>
 </mapper>

@@ -9,15 +9,16 @@ public class BookVO {
 	private String publisher;
 	private String page;
 	private String info;
+	private String userid;
 	
-	public BookVO() {};
+	public BookVO() {};							//jsp에서 컨트롤러로 vo를 넘겨주기 위해서는 기본 생성자 반드시 필요
 	public BookVO(String title, String ddc){	
 		this.title = title;
 		this.ddc = ddc;
 	}
 	
-	
-	public BookVO(String isbn, String title, String ddc, String author, String publisher, String page, String info) {
+	public BookVO(String isbn, String title, String ddc, String author, String publisher, String page, String info,
+			String userid) {
 		super();
 		this.isbn = isbn;
 		this.title = title;
@@ -26,9 +27,9 @@ public class BookVO {
 		this.publisher = publisher;
 		this.page = page;
 		this.info = info;
+		this.userid = userid;
 	}
-
-
+	
 	public String getTitle() {
 		return title;
 	}
@@ -71,10 +72,18 @@ public class BookVO {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "BookVO [isbn=" + isbn + ", title=" + title + ", ddc=" + ddc + ", author=" + author + ", publisher="
-				+ publisher + ", page=" + page + ", info=" + info + "]";
+				+ publisher + ", page=" + page + ", info=" + info + ", userid=" + userid + "]";
 	}
 	
 	

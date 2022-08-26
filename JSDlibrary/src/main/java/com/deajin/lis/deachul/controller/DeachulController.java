@@ -16,6 +16,7 @@ public class DeachulController {
 	@Autowired
 	DeachulService dService;
 	
+	
 	@RequestMapping(value="/quick", method=RequestMethod.GET)
 	public String quickMove(@RequestParam("des1") String des1, @RequestParam("des2") String des2) {
 		System.out.println("퀵무");
@@ -26,6 +27,8 @@ public class DeachulController {
 	public String insertBook(BookVO vo) {
 		
 		System.out.println(vo);
+		
+		vo.setUserid("test1");//테스트용 로그인 이후 세션의 값으로 변경해야함
 		int result = dService.insertBook(vo);
 		
 		System.out.println(result);
