@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bookMapper">
+	<insert id="insertBook" parameterType="com.deajin.lis.commons.BookVO">
+		insert into DJBOOK (
+		isbn,
+		title,
+		ddc,
+		author,
+		publisher,
+		page,
+		info,
+		userid
+		)
+		values(
+		#{isbn},
+		#{title},
+		#{ddc},
+		#{author},
+		#{publisher},
+		#{page},
+		#{info},
+		#{userid}
+		)
+	</insert>
+	
+	<select id="getBookList" resultType="com.deajin.lis.commons.BookVO">
+		select * from DJBOOK
+	</select>
+</mapper>

@@ -2,6 +2,7 @@ package com.deajin.lis.util;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.deajin.lis.commons.UserVO;
@@ -14,18 +15,26 @@ public class sessionManager {
 	 * @param vo
 	 * @return HashMap<String, String>
 	 * 		- msg : 결과 메세
-	 * 		- code : 결과 코드(000 성공, 001 실)
+	 * 		- code : 결과 코드(000 성공, 001 실패)
 	 */
-	public HashMap<String, String> setLoginSession(HttpSession session, UserVO vo){
+	public static HashMap<String, String> setLoginSession(HttpServletRequest req, UserVO vo){
 		HashMap<String, String> result = new HashMap();
+		
+		HttpSession session = req.getSession();
+		
+		System.out.println("set session");
 		
 		session.setAttribute("userid", vo.getUserid());
 		session.setAttribute("username", vo.getUsername());
 		session.setAttribute("phone", vo.getPhone());
 		if(session.getAttribute("userid")!= null && session.getAttribute("username")!= null && session.getAttribute("phone")!= null) {
+			System.out.println("널 아님");
+			
 			result.put("msg", "로그인 성공");
 			result.put("code", "000");
 		}else {
+			
+			System.out.println("널 임");
 			result.put("msg", "로그인 실패 - 세션에 로그인 정보를 저장하는데 실패했습니다.");
 			result.put("code", "001");
 		}
