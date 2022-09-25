@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.deajin.lis.book.service.BookService;
 import com.deajin.lis.commons.BookVO;
 import com.deajin.lis.commons.UserVO;
+import com.deajin.lis.deachul.service.DeachulService;
+import com.deajin.lis.deachul.vo.DeachulVO;
 import com.deajin.lis.test.Service.testService;
 import com.deajin.lis.util.sessionManager;
 
@@ -41,21 +43,28 @@ public class HomeController {
 	@Autowired
 	BookService bService;
 	
+	@Autowired
+	DeachulService dService;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(Locale locale, Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String flag = "false";
+		if(session.getAttribute("userid") != null) {
+			flag = "true";
+			UserVO user = new UserVO();
+			
+			user.setUserid((String)session.getAttribute("userid"));
+			user.setUsername((String)session.getAttribute("username"));
+			user.setPhone((String)session.getAttribute("phone"));
+			model.addAttribute("user", user);
+		}
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+		model.addAttribute("flag", flag);
+		return "main";
 	}
 	
 	@RequestMapping(value="/move", method=RequestMethod.GET)
@@ -93,13 +102,59 @@ public class HomeController {
 		
 		HashMap<String, String> seResult = sessionManager.setLoginSession(req, vo);
 		
-		List<BookVO> bookList = bService.getBookList();
+		//List<BookVO> bookList = bService.getBookList();
 		
 		System.out.println("결과 : " + seResult);
 		
 		model.addAttribute("sessionVO", req.getSession());
-		model.addAttribute("bookList", bookList);
+		//model.addAttribute("bookList", bookList);
 		model.addAttribute("user", vo);
 		return "test/test_deachul";
 	}
+	
+	@RequestMapping(value="/deachulList", method=RequestMethod.GET)
+	public String MypageDeachulList(HttpServletRequest req, Model model) {
+		HttpSession session = req.getSession();
+		
+		String id = (String)session.getAttribute("userid");
+		String name = (String)session.getAttribute("username");
+		if(id == null) {
+			id = "test1";
+			name = "서민기";
+		}
+		
+		
+		List<HashMap<String, String>> dList = dService.getDeachulList(id);
+		UserVO user = new UserVO();
+		
+		user.setUsername(name);
+		user.setUserid(id);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("dList", dList);
+		return "mypage/deachul_list";
+	}
+	
+	@RequestMapping(value="/loginpage", method= RequestMethod.GET)
+	public String loginPage() {
+		
+		return "user/login";
+	}
+	
+	@RequestMapping(value="/signin", method= RequestMethod.GET)
+	public String signInPage() {
+		
+		return "user/signin";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

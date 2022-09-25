@@ -9,57 +9,36 @@
 </head>
 <body>
 
-<h1>그냥 </h1>
-${list.get(0).title }
-${list.get(0).ddc }
-<br>
-${list.get(1).title }
-${list.get(1).ddc }
-<br>
-<h1>jstl 적용</h1>
-<c:forEach items="${list}" var="book">
-	<div>
-	${book.title }  / ${book.ddc }
-	<input type="hidden" name="book" value="${book.title }">
-	</div><br>
+<h1>책목록</h1>
+<table>
+<tr>
+	<td>서명</td>
+	<td>저자</td>
+	<td>출판사</td>
+	<td>ddc</td>
+</tr>
+<c:forEach items="${bList}" var="book">
+	<tr>
+	<td>${book.title }</td>
+	<td>${book.author }</td>
+	<td>${book.publisher }</td>
+	<td>${book.ddc }</td>
+	</tr>
 </c:forEach>
+</table>
 
-ID : <input type="text" id="id"/><br>
-PASS : <input type="text" id="pass"/>
-<button type="button" id="insert" onclick="insertId()">입력</button>
 
+<h2>페이징 버튼</h2>
+<c:forEach begin="1" end="${pvo.totalPages }" varStatus="step">
+<button onclick="pageClick(${step.index})">${step.index }</button>
+</c:forEach>
 <br>
 <br>
-찾아올 인덱스 <input type="text" id="ind">
-<button type="button" id="insert" onclick="searchId()">확인</button>
 </body>
 <script src="//code.jquery.com/jquery-3.5.1.min.js" ></script> 
 <script>
-function insertId(){
-	let id = document.getElementById('id').value;
-	let pass = document.getElementById('id').value;
-	
-	$.ajax({
-		url:'/library/test',
-		type:'get',
-		contentType: 'application/json; charset=utf-8;',
-		dataType: 'json',
-		data:{'id' : id, 'pass' : pass},
-		success: function(res){
-			console.log('success');
-			alert(res.msg);	
-		},
-		error: function(res){
-			console.log(res);
-			alert('보내지 못했음.');
-		}
-		
-	});
-}
-
-function searchId(){
-	let i = document.getElementById('ind').value;
-	console.log(document.getElementsByName('book')[i].value);
+function pageClick(index){
+	location.href='/book/getList?page=' + index;
 }
 </script>
 </html>

@@ -1,6 +1,7 @@
 package com.deajin.lis.deachul.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -19,6 +20,11 @@ public class DeachulDAO {
 	public int insertDeachul(List<DeachulVO> dList) {
 		// TODO Auto-generated method stub
 		return session.insert("deachulMapper.insertDeachul", dList);
+	}
+
+	public List<HashMap<String, String>> getDeachulList(String id) {
+		// TODO Auto-generated method stub
+		return session.selectList("deachulMapper.getDeachulList", id);
 	}
 
 	

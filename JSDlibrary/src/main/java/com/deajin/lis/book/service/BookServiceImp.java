@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.deajin.lis.book.DAO.BookDAO;
 import com.deajin.lis.commons.BookVO;
+import com.deajin.lis.commons.pageVO;
 
 @Repository
 public class BookServiceImp implements BookService{
@@ -18,7 +19,13 @@ public class BookServiceImp implements BookService{
 		return bDao.insertBook(vo);
 	}
 	
-	public List<BookVO> getBookList(){
-		return bDao.getBookList();
+	public List<BookVO> getBookList(pageVO pvo){
+		return bDao.getBookList(pvo);
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return bDao.getCount();
 	}
 }

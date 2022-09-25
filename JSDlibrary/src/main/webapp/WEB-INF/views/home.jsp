@@ -8,7 +8,9 @@
 <h1>
 	재환이 졸작 
 </h1>
-
+${user }
+<button>회원가입</button>
+<button>로그인</button>
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

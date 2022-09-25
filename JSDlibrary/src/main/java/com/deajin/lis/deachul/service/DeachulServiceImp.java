@@ -1,6 +1,7 @@
 package com.deajin.lis.deachul.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,9 @@ public class DeachulServiceImp implements DeachulService{
 	
 	public int insertDeachul(List<DeachulVO> dList) {
 		return dao.insertDeachul(dList);
+	}
+	
+	public List<HashMap<String, String>> getDeachulList(String id){
+		return dao.getDeachulList(id);
 	}
 }

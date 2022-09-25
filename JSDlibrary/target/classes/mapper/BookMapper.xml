@@ -25,7 +25,17 @@
 		)
 	</insert>
 	
-	<select id="getBookList" resultType="com.deajin.lis.commons.BookVO">
-		select * from DJBOOK
+	<select id="getBookList" resultType="com.deajin.lis.commons.BookVO" parameterType="com.deajin.lis.commons.pageVO">
+		select book.*
+		from
+		(select ROW_NUMBER() OVER() as rownum ,B.* from DJBOOK B) as book
+		where 
+		<![CDATA[book.rownum >= #{startPage} and book.rownum <= #{endPage};
+		]]>
+	</select>
+	
+	
+	<select id="getCount" resultType="_int">
+		SELECT count(*) from DJBOOK
 	</select>
 </mapper>

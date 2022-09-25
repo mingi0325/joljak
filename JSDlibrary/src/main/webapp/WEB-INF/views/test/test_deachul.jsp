@@ -105,7 +105,7 @@ ${bookList }
 		$.ajax({
 			url:'/deachul/insert',
 			type:'post',
-			traditional : true,
+			tradition : true,
 			dataType: 'json',
 			data:{deachul : arr},
 			success: function(res){

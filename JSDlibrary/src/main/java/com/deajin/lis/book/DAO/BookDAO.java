@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.deajin.lis.commons.BookVO;
+import com.deajin.lis.commons.pageVO;
 
 @Repository
 public class BookDAO {
@@ -19,8 +20,13 @@ public class BookDAO {
 		return session.insert("bookMapper.insertBook", vo);
 	}
 	
-	public List<BookVO> getBookList(){
+	public List<BookVO> getBookList(pageVO pvo){
 		
-		return session.selectList("bookMapper.getBookList");
+		return session.selectList("bookMapper.getBookList", pvo);
+	}
+
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return session.selectOne("bookMapper.getCount");
 	}
 }
