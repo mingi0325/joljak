@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.deajin.lis.book.DAO.BookDAO;
 import com.deajin.lis.commons.BookVO;
 import com.deajin.lis.commons.pageVO;
+import com.deajin.lis.deachul.vo.PickVO;
 
 @Repository
 public class BookServiceImp implements BookService{
@@ -27,5 +28,17 @@ public class BookServiceImp implements BookService{
 	public int getCount() {
 		// TODO Auto-generated method stub
 		return bDao.getCount();
+	}
+
+	@Override
+	public BookVO getBookDetail(String isbn) {
+		// TODO Auto-generated method stub
+		return bDao.getBookDetail(isbn);
+	}
+
+	@Override
+	public int pickBook(PickVO pick) {
+		// TODO Auto-generated method stub
+		return bDao.pickBook(pick);
 	}
 }

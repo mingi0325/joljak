@@ -26,8 +26,8 @@ public class sessionManager {
 		
 		session.setAttribute("userid", vo.getUserid());
 		session.setAttribute("username", vo.getUsername());
-		session.setAttribute("phone", vo.getPhone());
-		if(session.getAttribute("userid")!= null && session.getAttribute("username")!= null && session.getAttribute("phone")!= null) {
+		session.setAttribute("grade", vo.getGrade());
+		if(session.getAttribute("userid")!= null && session.getAttribute("username")!= null && session.getAttribute("grade")!= null) {
 			System.out.println("널 아님");
 			
 			result.put("msg", "로그인 성공");

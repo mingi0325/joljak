@@ -110,7 +110,7 @@ public class pageVO {
 	
 	private void calEnd() {
 		logger.info("paginfCount : {} / currentPage : {}", this.pagingCount, this.currentPage);
-		this.endPage = (this.pagingCount * this.currentPage) +1;
+		this.endPage = (this.pagingCount * this.currentPage);
 	}
 
 	@Override

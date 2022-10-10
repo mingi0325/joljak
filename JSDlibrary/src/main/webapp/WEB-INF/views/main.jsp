@@ -16,7 +16,7 @@ ${flag }
 <c:if test="${flag == false }">
 로그인 안했음<br>
 id : <input type="text" id="id"><br>
-pass : <input type="text" id="pass"><br>
+pass : <input type="password" id="pass"><br>
 
 <button onclick="signin()">회원가입</button><br>
 <button onclick="login()">로그인</button>
@@ -33,7 +33,7 @@ ${user.username }님 환영합니다<br>
 <br>
 <h1>로그인 여부 상관없는 버튼</h1>
 <a href="/book/getList?page=1">책목록</a>
-
+<a href="/board/getList?page=1">공지사항</a>
 </body>
 
 <script type="text/javascript">

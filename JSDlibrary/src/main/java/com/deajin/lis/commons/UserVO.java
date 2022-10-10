@@ -6,6 +6,7 @@ public class UserVO {
 	private String password;
 	private String username;
 	private String phone;
+	private String grade;
 	
 	public String getUserid() {
 		return userid;
@@ -32,9 +33,18 @@ public class UserVO {
 		this.phone = phone;
 	}
 	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	@Override
 	public String toString() {
-		return "userid : " + this.userid + " / pass : " + this.password + " / username : " + this.username + " / phone : " + this.phone;
+		return "UserVO [userid=" + userid + ", password=" + password + ", username=" + username + ", phone=" + phone
+				+ ", grade=" + grade + "]";
 	}
+	
+	
 	
 }

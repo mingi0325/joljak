@@ -18,7 +18,7 @@
 	<td>ddc</td>
 </tr>
 <c:forEach items="${bList}" var="book">
-	<tr>
+	<tr onclick="detailBook('${book.isbn}', '${book.title }')" style="cursor: pointer;">
 	<td>${book.title }</td>
 	<td>${book.author }</td>
 	<td>${book.publisher }</td>
@@ -34,11 +34,34 @@
 </c:forEach>
 <br>
 <br>
+ 
+<!-- 데이터 전송을 위한 hidden form -->
+<form id="frmData" name="frmData">
+	<input type="hidden" name="isbn" id="form_isbn"/>
+</form>
 </body>
 <script src="//code.jquery.com/jquery-3.5.1.min.js" ></script> 
 <script>
 function pageClick(index){
 	location.href='/book/getList?page=' + index;
+}
+
+function detailBook(isbn, title){
+	console.log(isbn);
+	console.log(title);
+	$('#form_isbn').val(isbn);
+	let pop_title = title +' 상세보기';
+	let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=yes";
+	
+	window.open("", pop_title,pop_feature);
+	
+	let frmData = document.frmData;
+	frmData.action = "/book/book_detail";
+	frmData.method = "post";
+	frmData.target = pop_title;
+	frmData.submit();
+	
+	console.log(frmData);
 }
 </script>
 </html>

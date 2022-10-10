@@ -28,9 +28,9 @@
 	<select id="getBookList" resultType="com.deajin.lis.commons.BookVO" parameterType="com.deajin.lis.commons.pageVO">
 		select book.*
 		from
-		(select ROW_NUMBER() OVER() as rownum ,B.* from DJBOOK B) as book
+		(select ROW_NUMBER() OVER() as rownum ,B.* from DJBOOK B order by ddc) as book
 		where 
-		<![CDATA[book.rownum >= #{startPage} and book.rownum <= #{endPage};
+		<![CDATA[book.rownum >= #{startPage} and book.rownum <= #{endPage}
 		]]>
 	</select>
 	
@@ -38,4 +38,16 @@
 	<select id="getCount" resultType="_int">
 		SELECT count(*) from DJBOOK
 	</select>
+	
+	
+	<select id="getBookDetail" parameterType="com.deajin.lis.commons.BookVO" resultType="com.deajin.lis.commons.BookVO">
+		SELECT *
+		FROM DJBOOK
+		WHERE isbn = #{isbn}
+	</select>
+	
+	<insert id="pickBook" parameterType="com.deajin.lis.deachul.vo.PickVO">
+		INSERT INTO DJPICK(isbn, userid)
+		VALUES(#{isbn}, #{userid})
+	</insert>
 </mapper>
