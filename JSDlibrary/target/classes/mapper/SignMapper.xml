@@ -18,7 +18,7 @@
 	
 	<insert id="insertUser" parameterType="com.deajin.lis.commons.UserVO">
 	
-		INSERT INTO DJUSER
+		INSERT INTO DJUSER(userid, password, username, phone)
 		VALUES(#{userid}, #{password}, #{username}, #{phone})
 	</insert>
 </mapper>
