@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardMapper">
+<select id="getCount" resultType="_int">
+	SELECT count(*) from DJBOARD
+</select>
+
+
+<select id="getBoardList" resultType="com.deajin.lis.board.vo.BoardVO" parameterType="com.deajin.lis.commons.pageVO">
+	select board.*
+	from
+	(select ROW_NUMBER() OVER(order by bNo desc) as rownum ,B.* from DJBOARD B) as board
+	where 
+	<![CDATA[board.rownum >= #{startPage} and board.rownum <= #{endPage}
+	]]>
+</select>
+
+<insert id="insertBoard" parameterType="com.deajin.lis.board.vo.BoardVO">
+	INSERT INTO DJBOARD(title, userid, contents, wdate)
+	VALUES (#{title}, #{userid}, #{contents}, sysdate())	
+</insert>
+</mapper>
