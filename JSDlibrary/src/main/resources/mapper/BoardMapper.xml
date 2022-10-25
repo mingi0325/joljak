@@ -20,4 +20,27 @@
 	INSERT INTO DJBOARD(title, userid, contents, wdate)
 	VALUES (#{title}, #{userid}, #{contents}, sysdate())	
 </insert>
+
+<select id="getBoardDetail" parameterType="_int" resultType="com.deajin.lis.board.vo.BoardVO">
+	select *
+	from DJBOARD
+	where bNo = #{bNo}
+</select>
+
+<update id="increaseCount" parameterType="_int">
+	UPDATE DJBOARD SET count = count + 1
+</update>
+
+<select id="getCommentList" resultType="com.deajin.lis.commons.CommentVO" parameterType="_int">
+	select *
+	from DJCOMMENT
+	where category = 1 and pkNo = #{bNo}
+	order by cNo desc
+</select>
+
+<insert id="insertComment" parameterType="com.deajin.lis.commons.CommentVO">
+	INSERT INTO DJCOMMENT(pkNo, category, userid, contents)
+	VALUES (#{pkNo}, 1, #{userid}, #{contents})
+</insert>
+
 </mapper>

@@ -95,6 +95,7 @@ function logout(){
 	location.href ="/sign/logout";
 }
 
+//게시판
 function insertBoardForm(){
 	
 	let pop_title = '게사판 등록';
@@ -144,7 +145,7 @@ function makeBoard(res){
 	for(let i = 0; i < list.length; i++){
 		let item = list[i];
 		
-		let text = '<tr><td>'+ item.bNo +'</td>'+
+		let text = '<tr onclick="board_detail('+item.bNo+')" style="cursor:pointer;"><td>'+ item.bNo +'</td>'+
 		'<td>'+item.title+'</td>'+
 		'<td>'+item.userid+'</td>'+
 		'<td>'+item.wdate+'</td>'+
@@ -168,13 +169,8 @@ function makeBoard(res){
 
 		if(i == pvo.currentPage){
 			$("#board_paging").val(i).prop("selected", true);
-		}
-
-		
+		}	
 	}
-	
-	
-	
 	
 }
 
@@ -183,5 +179,32 @@ function selectBoard(){
 	let page = selectBox.options[selectBox.selectedIndex].value;
 	callBoard(page);
 }
+
+function board_detail(no){
+	let detail = document.createElement("form");
+
+    detail.setAttribute("charset", "UTF-8");
+    detail.setAttribute("method", "Post");  
+    detail.setAttribute("action", "/board/detail"); 
+	
+    let hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "bNo");
+    hiddenField.setAttribute("value", no);
+    detail.appendChild(hiddenField);
+    
+    document.body.appendChild(detail);
+    
+	let pop_title = '게시판 상세보기';
+	let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=yes";
+	
+	window.open("", pop_title,pop_feature);
+	
+	
+	detail.target = pop_title;
+	detail.submit();
+}
+
+//추천도서
 </script>
 </html>

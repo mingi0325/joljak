@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.deajin.lis.board.serivce.BoardService;
 import com.deajin.lis.board.vo.BoardVO;
 import com.deajin.lis.commons.BookVO;
+import com.deajin.lis.commons.CommentVO;
 import com.deajin.lis.commons.pageVO;
 
 @Controller
@@ -114,6 +115,7 @@ public class BoardController {
 		
 		return res;
 	}
+	
 	@RequestMapping(value="/board/boardInsertForm", method = RequestMethod.GET)
 	public String InsertBoardForm(Model model, HttpServletRequest req) {
 		System.out.println("insert_board");
@@ -126,5 +128,43 @@ public class BoardController {
 
 		model.addAttribute("date", strNowDate);
 		return "board/board_insert";
+	}
+	
+	@RequestMapping(value="/board/detail", method = RequestMethod.POST)
+	public String getDetail(HttpServletRequest req, Model model) {
+		
+		
+		int bNo = Integer.parseInt(req.getParameter("bNo"));
+		int result = bService.increaseCount(bNo);
+		BoardVO bvo = bService.getBoardDetail(bNo);
+		
+		List<CommentVO> cList = bService.getCommentList(bNo);
+		
+		model.addAttribute("bvo", bvo);
+		model.addAttribute("cList", cList);
+		return "board/board_detail";
+	}
+	
+	@RequestMapping(value="/board/comment", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, String> BoardComment (HttpServletRequest req){
+		Map<String, String> res = new HashMap<String, String>();
+		HttpSession session = req.getSession();
+		
+		
+		int pkNo = Integer.parseInt(req.getParameter("pkNo"));
+		String contents = req.getParameter("contents");
+		String userid = (String)session.getAttribute("userid");
+		
+		CommentVO cvo = new CommentVO();
+		
+		cvo.setPkNo(pkNo);
+		cvo.setContents(contents);
+		cvo.setUserid(userid);
+		
+		int result = bService.insertComment(cvo);
+		res.put("code", "000");
+		
+		return res;
 	}
 }
