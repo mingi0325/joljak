@@ -16,8 +16,10 @@
 내용 : ${bvo.contents }<br>
 <input type="hidden" value="${bvo.bNo }" id="bNo">
 <h4>댓글</h4>
-<input type="text" name="contents" id="contents">
-<button onclick="insert_comment()">댓글 등록하기</button>
+<c:if test="${sessionScope.userid ne null }">
+	<input type="text" name="contents" id="contents">
+	<button onclick="insert_comment()">댓글 등록하기</button>
+</c:if>
 <br>
 <table>
 <tr>
