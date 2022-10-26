@@ -67,6 +67,8 @@
 						</c:if>
                         <a href="mailto:name@email.com">name@email.com</a>
                     </div>
+                    
+                    추가함
                     <p class="lead mb-5">내용</p>
                     <div class="social-icons">
                         <a class="social-icon" href="#!"><i class="fab fa-linkedin-in"></i></a>
