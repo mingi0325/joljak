@@ -43,6 +43,17 @@ ${user.username }님 환영합니다<br>
 
 
 <h1>화면단</h1>
+<style>
+.logo{
+	width:80px;
+	height: 80px;
+}
+</style>
+<a href="https://product.kyobobook.co.kr/bestseller/online?period=001" target="blank">
+<img src="../resources/img/kyobo.jpeg" class="logo">
+</a>
+
+
 
 <div id="div_board" style="border-bottom: 1px solid black; border-top: 1px solid black;">
 	<h3>게시판</h3>
