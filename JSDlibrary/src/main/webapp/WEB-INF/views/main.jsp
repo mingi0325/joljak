@@ -20,9 +20,6 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="../../resources/js/common_function.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="../../resources/js/common_function.js"></script>
-		
 		
 	</head>
 <body id="page-top">
@@ -65,7 +62,7 @@
 							<a href="/deachulList">대출목록으로</a>
 							<button onclick="logout()">로그아웃</button>
 						</c:if>
-                        <a href="mailto:name@email.com">name@email.com</a>
+                        
                     </div>
                     
                     추가함
@@ -107,7 +104,7 @@ ${user.username }님 환영합니다<br>
 
 
 
-<h1>화면단</h1>
+
 <style>
 .logo{
 	width:80px;
@@ -141,11 +138,44 @@ ${user.username }님 환영합니다<br>
 	
 	<select id="board_paging" onchange="selectBoard()"></select>
 </div>
+
+<br><br><br>
+<div id="div_book">
+	<h3>추천도서</h3>
+	
+	<c:if test="${sessionScope.userid ne null }">
+		<button type="button" onclick="insert_book()">추천도서 등록</button>
+	</c:if>
+	
+	
+	<h3>게시판</h3>
+	
+	<table id="table_book">
+	<thead>
+		<tr>
+			<td>순번</td>
+			<td>제목</td>
+			<td>저자</td>
+			<td>평점</td>
+			<td>작성자</td>
+		</tr>
+	</thead>
+	
+	<tbody id="book_body">
+	
+	</tbody>
+	</table>
+	
+	<select id="book_paging" onchange="selectBook()"></select>
+</div>
 <script type="text/javascript">
 
 $(function(){
-	callBoard(1);
+	callBoard(1, '/board/get');
+	callBoard(1, '/book/get');
 })
+
+//회원
 function signin(){
 	location.href ="/signin";
 }
@@ -175,7 +205,7 @@ function logout(){
 function insertBoardForm(){
 	
 	let pop_title = '게사판 등록';
-	let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=yes";
+	let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=no";
 	
 	window.open("", pop_title,pop_feature);
 	
@@ -187,19 +217,22 @@ function insertBoardForm(){
 	
 	console.log(frmData);
 }
-function callBoard(page){
+function callBoard(page, url){
 	console.log(page);
 	$.ajax({
-		url:'/board/get',
+		url: url,
 		type:'get',
 		dataType: 'json',
 		data:{page : page},
 		success: function(res){
 			if(res.code == '000'){
-				
+				console.log(url);
 				console.log(res);
-				
-				makeBoard(res);
+				if(url =='/board/get'){
+					makeBoard(res);					
+				}else{
+					makeBook(res);
+				}
 			}else{
 				alert('목록 호출에 실패했습니다.');
 			}
@@ -253,7 +286,7 @@ function makeBoard(res){
 function selectBoard(){	
 	let selectBox = document.getElementById('board_paging')
 	let page = selectBox.options[selectBox.selectedIndex].value;
-	callBoard(page);
+	callBoard(page, '/board/get');
 }
 
 function board_detail(no){
@@ -272,7 +305,7 @@ function board_detail(no){
     document.body.appendChild(detail);
     
 	let pop_title = '게시판 상세보기';
-	let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=yes";
+	let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=no";
 	
 	window.open("", pop_title,pop_feature);
 	
@@ -282,5 +315,93 @@ function board_detail(no){
 }
 
 //추천도서
+function insert_book(){
+	let insertForm = document.createElement("form");
+	
+	insertForm.setAttribute("charset", "UTF-8");
+	insertForm.setAttribute("method", "get");  
+	insertForm.setAttribute("action", "/book/insertForm");
+    
+    document.body.appendChild(insertForm);
+    
+    let pop_title = "추천도서 추가하기";
+    let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=no";
+    
+    window.open("", pop_title, pop_feature);
+    
+    insertForm.target = pop_title;
+    insertForm.submit();
+}
+
+function makeBook(res){
+	let pvo = res.bookPage;
+	let list = res.bookList;
+	
+	//목록
+	console.log(pvo);
+	let board = $('#book_body');
+	board.html('');
+	for(let i = 0; i < list.length; i++){
+		let item = list[i];
+		
+		let text = '<tr onclick="book_detail('+item.bkNo+')" style="cursor:pointer;"><td>'+ item.bkNo +'</td>'+
+		'<td>'+item.title+'</td>'+
+		'<td>'+item.author+'</td>'+
+		'<td>'+item.star+'</td>'+
+		'<td>'+item.userid+'</td></tr>';
+		
+		board.html(board.html() + text);
+	}
+	console.log('done');
+	//페이징
+	let	select = $('#book_paging');
+	select.html('');
+	for(let i = 1; i <= pvo.totalPages; i++){
+
+		let text = '<option value="'+i+'">'+i+'</option>';
+		
+		select.append(text);
+		
+	}
+	
+	for(let i = 1; i <= pvo.totalPages; i++){
+
+		if(i == pvo.currentPage){
+			$("#book_paging").val(i).prop("selected", true);
+		}	
+	}
+	
+}
+
+function book_detail(bkNo){
+	let detail = document.createElement("form");
+
+    detail.setAttribute("charset", "UTF-8");
+    detail.setAttribute("method", "Post");  
+    detail.setAttribute("action", "/book/book_detail"); 
+	
+    let hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "bkNo");
+    hiddenField.setAttribute("value", bkNo);
+    detail.appendChild(hiddenField);
+    
+    document.body.appendChild(detail);
+    
+	let pop_title = '도서 상세보기';
+	let pop_feature = "scrollbars=yes,width=800,height=600,location=no, resizable=no";
+	
+	window.open("", pop_title,pop_feature);
+	
+	
+	detail.target = pop_title;
+	detail.submit();
+}
+
+function selectBook(){
+	let selectBox = document.getElementById('book_paging')
+	let page = selectBox.options[selectBox.selectedIndex].value;
+	callBoard(page, '/book/get');
+}
 </script>
 </html>

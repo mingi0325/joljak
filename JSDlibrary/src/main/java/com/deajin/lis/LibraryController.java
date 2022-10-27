@@ -25,21 +25,7 @@ public class LibraryController {
 	@RequestMapping(value="/library/BookList", method=RequestMethod.GET)
 	public String getBookList(Model model) {
 		
-		BookVO bvo1 = new BookVO("지적 대화를 위한 넓고 얕은 지식 1","800"); 
-		BookVO bvo2 = new BookVO("대충경재","500");
-		List<BookVO> bookList = new ArrayList();
-	
-		BookVO bvo3 = new BookVO("섹스잘하는법 ","600");
 		
-		bookList.add(bvo1);
-		bookList.add(bvo2);
-		bvo3.setTitle("친구 잘 사귀는 방");
-		System.out.println("바뀐 책 이름 : " + bvo3.getTitle());
-		bookList.add(bvo3);
-		
-		
-		
-		model.addAttribute("list", bookList);
 		return "library/book_list";
 	}
 	

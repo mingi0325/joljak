@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.deajin.lis.commons.BookVO;
+import com.deajin.lis.commons.CommentVO;
 import com.deajin.lis.commons.pageVO;
 import com.deajin.lis.deachul.vo.PickVO;
 
@@ -39,5 +40,15 @@ public class BookDAO {
 	public int pickBook(PickVO pick) {
 		// TODO Auto-generated method stub
 		return session.insert("bookMapper.pickBook", pick);
+	}
+
+	public int insertComment(CommentVO cvo) {
+		// TODO Auto-generated method stub
+		return session.insert("bookMapper.insertComment", cvo);
+	}
+
+	public List<CommentVO> getCommentList(int bkNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("bookMapper.getCommentList", bkNo);
 	}
 }

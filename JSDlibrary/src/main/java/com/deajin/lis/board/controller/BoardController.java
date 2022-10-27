@@ -163,7 +163,11 @@ public class BoardController {
 		cvo.setUserid(userid);
 		
 		int result = bService.insertComment(cvo);
-		res.put("code", "000");
+		if(result > 0) {
+			res.put("code", "000");			
+		}else {
+			res.put("code", "001");
+		}
 		
 		return res;
 	}

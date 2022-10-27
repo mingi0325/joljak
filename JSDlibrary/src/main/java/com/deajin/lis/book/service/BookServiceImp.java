@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.deajin.lis.book.DAO.BookDAO;
 import com.deajin.lis.commons.BookVO;
+import com.deajin.lis.commons.CommentVO;
 import com.deajin.lis.commons.pageVO;
 import com.deajin.lis.deachul.vo.PickVO;
 
@@ -40,5 +41,17 @@ public class BookServiceImp implements BookService{
 	public int pickBook(PickVO pick) {
 		// TODO Auto-generated method stub
 		return bDao.pickBook(pick);
+	}
+
+	@Override
+	public int insertComment(CommentVO cvo) {
+		// TODO Auto-generated method stub
+		return bDao.insertComment(cvo);
+	}
+
+	@Override
+	public List<CommentVO> getCommentList(int bkNo) {
+		// TODO Auto-generated method stub
+		return bDao.getCommentList(bkNo);
 	}
 }

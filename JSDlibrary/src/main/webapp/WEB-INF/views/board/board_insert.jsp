@@ -41,7 +41,7 @@ function cancelform(){
 function submitform(){
 	if($('#title').val() == ''&&
 	$('#contents').html() == ''){
-		alert('비어있');
+		alert('입력칸이 비어있는 상태로는 등록할 수 없습니다.');
 		return;
 	}
 	if(window.confirm('지금 내용으로 게시글을등록합니다.')){

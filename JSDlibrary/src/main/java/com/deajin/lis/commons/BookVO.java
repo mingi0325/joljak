@@ -2,51 +2,42 @@ package com.deajin.lis.commons;
 
 
 public class BookVO {
-	private String isbn;
+	private String bkNo;
 	private String title;
-	private String ddc;
 	private String author;
 	private String publisher;
 	private String page;
 	private String info;
 	private String userid;
+	private String star;
 	
 	public BookVO() {};							//jsp에서 컨트롤러로 vo를 넘겨주기 위해서는 기본 생성자 반드시 필요
-	public BookVO(String title, String ddc){	
-		this.title = title;
-		this.ddc = ddc;
-	}
 	
-	public BookVO(String isbn, String title, String ddc, String author, String publisher, String page, String info,
-			String userid) {
+	
+	
+	public BookVO(String bkNo, String title, String author, String publisher, String page, String info, String userid,
+			String star) {
 		super();
-		this.isbn = isbn;
+		this.bkNo = bkNo;
 		this.title = title;
-		this.ddc = ddc;
 		this.author = author;
 		this.publisher = publisher;
 		this.page = page;
 		this.info = info;
 		this.userid = userid;
+		this.star = star;
 	}
-	
+	public String getBkNo() {
+		return bkNo;
+	}
+	public void setBkNo(String bkNo) {
+		this.bkNo = bkNo;
+	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getDdc() {
-		return ddc;
-	}
-	public void setDdc(String ddc) {
-		this.ddc = ddc;
-	}
-	public String getIsbn() {
-		return isbn;
-	}
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
 	}
 	public String getAuthor() {
 		return author;
@@ -78,13 +69,19 @@ public class BookVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	
-	
+	public String getStar() {
+		return star;
+	}
+	public void setStar(String star) {
+		this.star = star;
+	}
 	@Override
 	public String toString() {
-		return "BookVO [isbn=" + isbn + ", title=" + title + ", ddc=" + ddc + ", author=" + author + ", publisher="
-				+ publisher + ", page=" + page + ", info=" + info + ", userid=" + userid + "]";
+		return "BookVO [bkNo=" + bkNo + ", title=" + title + ", author=" + author + ", publisher=" + publisher
+				+ ", page=" + page + ", info=" + info + ", userid=" + userid + ", star=" + star + "]";
 	}
+	
+	
 	
 	
 	

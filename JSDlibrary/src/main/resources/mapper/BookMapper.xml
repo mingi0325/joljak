@@ -4,31 +4,29 @@
 <mapper namespace="bookMapper">
 	<insert id="insertBook" parameterType="com.deajin.lis.commons.BookVO">
 		insert into DJBOOK (
-		isbn,
 		title,
-		ddc,
 		author,
 		publisher,
 		page,
 		info,
-		userid
+		userid,
+		star
 		)
 		values(
-		#{isbn},
 		#{title},
-		#{ddc},
 		#{author},
 		#{publisher},
 		#{page},
 		#{info},
-		#{userid}
+		#{userid},
+		#{star}
 		)
 	</insert>
 	
 	<select id="getBookList" resultType="com.deajin.lis.commons.BookVO" parameterType="com.deajin.lis.commons.pageVO">
 		select book.*
 		from
-		(select ROW_NUMBER() OVER() as rownum ,B.* from DJBOOK B order by ddc) as book
+		(select ROW_NUMBER() OVER(order by bkNo) as rownum ,B.* from DJBOOK B) as book
 		where 
 		<![CDATA[book.rownum >= #{startPage} and book.rownum <= #{endPage}
 		]]>
@@ -43,11 +41,23 @@
 	<select id="getBookDetail" parameterType="com.deajin.lis.commons.BookVO" resultType="com.deajin.lis.commons.BookVO">
 		SELECT *
 		FROM DJBOOK
-		WHERE isbn = #{isbn}
+		WHERE bkNo = #{bkNo}
 	</select>
 	
 	<insert id="pickBook" parameterType="com.deajin.lis.deachul.vo.PickVO">
 		INSERT INTO DJPICK(isbn, userid)
 		VALUES(#{isbn}, #{userid})
 	</insert>
+	
+	<insert id="insertComment" parameterType="com.deajin.lis.commons.CommentVO">
+		INSERT INTO DJCOMMENT(pkNo, category, userid, contents)
+		VALUES (#{pkNo}, 2, #{userid}, #{contents})
+	</insert>
+	<select id="getCommentList" resultType="com.deajin.lis.commons.CommentVO" parameterType="_int">
+		select *
+		from DJCOMMENT
+		where category = 2 and pkNo = #{bkNo}
+		order by cNo desc
+	</select>
+	
 </mapper>
