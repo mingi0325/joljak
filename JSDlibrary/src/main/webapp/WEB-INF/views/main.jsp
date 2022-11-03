@@ -50,27 +50,29 @@
 	        <div class="container-fluid p-0">
 	        <hr>
 	        <section class="resume-section" id="about">
-	                <div class="resume-section-content">
-	                    <div class="subheading mb-5">
-	                        <c:if test="${flag == false }">
-							
-								id : <input type="text" id="id"><br>
-								pass : <input type="password" id="pass"><br>
-								<button onclick="signin()">회원가입</button><br>
-								<button onclick="login()">로그인</button>
-							</c:if>·
-							<c:if test="${flag == true }">
+		        <div class="box">
+		                <div class="resume-section-content">
+		                    <div class="subheading mb-5">
+		                        <c:if test="${flag == false }">
 								
-								<!-- 데이터 전송을 위한 hidden form -->
-								<form id="frmData_board" name="frmData_board"></form>
-								<h1 class="mb-0"> <span class="text-primary">${user.username }님</span> 환영합니다</h1>
-								<button onclick="logout()">로그아웃</button>
-							</c:if>
-	                        
-	                    </div>
-	                   
-	                </div>
-	            </section>
+									id : <input type="text" id="id"><br>
+									pass : <input type="password" id="pass"><br>
+									<button onclick="signin()">회원가입</button><br>
+									<button onclick="login()">로그인</button>
+								</c:if>·
+								<c:if test="${flag == true }">
+									
+									<!-- 데이터 전송을 위한 hidden form -->
+									<form id="frmData_board" name="frmData_board"></form>
+									<h1 class="mb-0"> <span class="text-primary">${user.username }님</span> 환영합니다</h1>
+									<button onclick="logout()">로그아웃</button>
+								</c:if>
+		                        
+		                    </div>
+		                   
+		                </div>
+		           </div>
+	           </section>
 	            
 	            <hr>
 	            
@@ -115,6 +117,7 @@
 	            <hr>
 	            
 	            <section class="resume-section" id="education">
+	            <div class="boxboard">
 	        	    <div class="resume-section-content">
 	    	        	<div id="div_board" style="border-bottom: 1px solid black; border-top: 1px solid black;">
 							<h3>자유 게시판</h3>
@@ -142,12 +145,14 @@
 							<select id="board_paging" onchange="selectBoard()"></select>
 						</div>
 					</div>
-			</section>
+				</div>
+				</section>
 			<hr>
 	        <section class="resume-section" id="skills">
+	        <div class="boxboard">
 	     		<div class="resume-section-content">
 					<div id="div_book" style="border-bottom: 1px solid black; border-top: 1px solid black">
-						<h3>추천도서</h3>
+						<h3>추천 게시판</h3>
 		
 							<c:if test="${sessionScope.userid ne null }">
 								<button type="button" onclick="insert_book()">추천도서 등록</button>
@@ -172,6 +177,7 @@
 						<select id="book_paging" onchange="selectBook()"></select>
 					</div>
 				</div>
+			</div>
 			</section>
 			<script type="text/javascript">
 	

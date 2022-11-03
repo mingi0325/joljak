@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Resume v7.0.5 (https://startbootstrap.com/theme/resume)
@@ -89,7 +90,7 @@ body {
 	line-height: var(- -bs-body-line-height);
 	color: var(- -bs-body-color);
 	text-align: var(- -bs-body-text-align);
-	background-color: var(- -bs-body-bg);
+	background-color: black;
 	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -306,6 +307,9 @@ img, svg {
 table {
 	caption-side: bottom;
 	border-collapse: collapse;
+	text-align: center;
+	width: 1200px;
+	
 }
 
 caption {
@@ -324,6 +328,8 @@ thead, tbody, tfoot, tr, td, th {
 	border-color: inherit;
 	border-style: solid;
 	border-width: 0;
+	border-bottom: 1px solid gray;
+	padding: 10px;
 }
 
 label {
@@ -10990,7 +10996,7 @@ section.resume-section .resume-section-content {
 
 @media ( min-width : 992px) {
 	section.resume-section {
-		padding-left: 30rem;
+		padding-left: 15rem;
 		padding-right: 30rem;
 		padding-top: 5rem;
 		padding-bottom: 5rem;
@@ -11000,4 +11006,23 @@ section.resume-section .resume-section-content {
 .logo {
 	width: 220px;
 	height: 180px;
+}
+
+.box {
+	border: 5px solid gray;
+	border-radius: 0.5px;
+	padding-left: 50%;
+	padding-right: 60%;
+	padding-top: 200px;
+	padding-bottom: 200px;
+	
+}
+.boxboard {
+	border: 5px solid gray;
+	border-radius: 0.5px;
+	padding-left: 100px;
+	padding-right: 100px;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	
 }
