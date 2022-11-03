@@ -22,9 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.deajin.lis.book.service.BookService;
 import com.deajin.lis.commons.BookVO;
 import com.deajin.lis.commons.UserVO;
-import com.deajin.lis.deachul.service.DeachulService;
-import com.deajin.lis.deachul.vo.DeachulVO;
-import com.deajin.lis.test.Service.testService;
 import com.deajin.lis.util.sessionManager;
 
 /**
@@ -36,15 +33,13 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private testService service;
+	
 	
 	private static sessionManager manager;
 	
 	@Autowired
 	BookService bService;
 	
-	@Autowired
-	DeachulService dService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -74,16 +69,7 @@ public class HomeController {
 		return "test_page";
 	}
 	
-	
-	@RequestMapping(value="/testmove", method=RequestMethod.GET)
-	public String testmove(Model model) {
-		List<UserVO> list = service.getTestUser();
-		for(UserVO item : list) {
-			System.out.println(item.toString());
-		}
-		model.addAttribute("test", list);
-		return "test_page";
-	}
+
 	
 	
 	
@@ -112,28 +98,7 @@ public class HomeController {
 		return "test/test_deachul";
 	}
 	
-	@RequestMapping(value="/deachulList", method=RequestMethod.GET)
-	public String MypageDeachulList(HttpServletRequest req, Model model) {
-		HttpSession session = req.getSession();
-		
-		String id = (String)session.getAttribute("userid");
-		String name = (String)session.getAttribute("username");
-		if(id == null) {
-			id = "test1";
-			name = "서민기";
-		}
-		
-		
-		List<HashMap<String, String>> dList = dService.getDeachulList(id);
-		UserVO user = new UserVO();
-		
-		user.setUsername(name);
-		user.setUserid(id);
-		
-		model.addAttribute("user", user);
-		model.addAttribute("dList", dList);
-		return "mypage/deachul_list";
-	}
+	
 	
 	@RequestMapping(value="/loginpage", method= RequestMethod.GET)
 	public String loginPage() {

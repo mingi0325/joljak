@@ -64,7 +64,6 @@
 								<!-- 데이터 전송을 위한 hidden form -->
 								<form id="frmData_board" name="frmData_board"></form>
 								<h1 class="mb-0"> <span class="text-primary">${user.username }님</span> 환영합니다</h1>
-								<a href="/deachulList">대출목록으로</a>
 								<button onclick="logout()">로그아웃</button>
 							</c:if>
 	                        

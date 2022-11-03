@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.deajin.lis.commons.BookVO;
 import com.deajin.lis.commons.CommentVO;
 import com.deajin.lis.commons.pageVO;
-import com.deajin.lis.deachul.vo.PickVO;
 
 @Repository
 public class BookDAO {
@@ -37,10 +36,6 @@ public class BookDAO {
 		return session.selectOne("bookMapper.getBookDetail", isbn);
 	}
 
-	public int pickBook(PickVO pick) {
-		// TODO Auto-generated method stub
-		return session.insert("bookMapper.pickBook", pick);
-	}
 
 	public int insertComment(CommentVO cvo) {
 		// TODO Auto-generated method stub

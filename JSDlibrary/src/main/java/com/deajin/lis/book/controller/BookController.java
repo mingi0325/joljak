@@ -19,7 +19,6 @@ import com.deajin.lis.book.service.BookService;
 import com.deajin.lis.commons.BookVO;
 import com.deajin.lis.commons.CommentVO;
 import com.deajin.lis.commons.pageVO;
-import com.deajin.lis.deachul.vo.PickVO;
 
 @Controller
 public class BookController {
@@ -100,34 +99,6 @@ public class BookController {
 		return "library/book_detail";
 	}
 	
-	@RequestMapping(value="/book/pick", method=RequestMethod.POST)
-	public @ResponseBody Map<String, String> pickBook(@RequestParam("isbn") String isbn, HttpServletRequest req){
-		Map<String, String> res = new HashMap<String, String>();
-		HttpSession session = req.getSession();
-		
-		String id = (String)session.getAttribute("userid");
-		System.out.println("isbn"+isbn);
-		
-		System.out.println("id" + id);
-		if(id == null) {
-			res.put("msg", "먼저 로그인을 해야합니다.");
-			return res;
-		}
-		
-		PickVO pick = new PickVO();
-		
-		//도서중복 체크 넣어야함
-		
-		pick.setIsbn(isbn);
-		pick.setUserid(id);
-		int result = bService.pickBook(pick);
-		if(result > 0) {
-			res.put("msg", "해당 도서를 찜 했습니다.");			
-		}else {
-			res.put("msg", "처리 과정중 문제가 발생했습니다.");
-		}
-		return res;
-	}
 	
 	@RequestMapping(value="/book/insertForm", method=RequestMethod.GET)
 	public String insertForm(Model model, HttpServletRequest req) {
