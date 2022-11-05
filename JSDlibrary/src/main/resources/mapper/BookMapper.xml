@@ -44,10 +44,6 @@
 		WHERE bkNo = #{bkNo}
 	</select>
 	
-	<insert id="pickBook" parameterType="com.deajin.lis.deachul.vo.PickVO">
-		INSERT INTO DJPICK(isbn, userid)
-		VALUES(#{isbn}, #{userid})
-	</insert>
 	
 	<insert id="insertComment" parameterType="com.deajin.lis.commons.CommentVO">
 		INSERT INTO DJCOMMENT(pkNo, category, userid, contents)
